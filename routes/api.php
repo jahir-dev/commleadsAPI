@@ -28,3 +28,13 @@ use Illuminate\Http\Request;
 	Route::apiResource('offers', 'OfferController');
 	Route::apiResource('messages', 'MessageController');
 //});
+
+
+//working on auth
+Route::post('register', 'AuthController@register');
+Route::post('login', 'AuthController@login');
+Route::post('recover', 'AuthController@recover');
+Route::group(['middleware' => ['jwt.auth']], function() {
+    Route::get('logout', 'AuthController@logout');
+    Route::post('logout', 'AuthController@logout');
+});
